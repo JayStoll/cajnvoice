@@ -2,7 +2,12 @@
 This is the new and improved CAJNvoice. using the django web framework we will finally put the project on the web.
 
 # Important Commands
-** all commands must be run at the root (where manage.py is located) **
+```
+pipenv shell
+```
+create a python shell
+
+** all commands below must be run at the root (where manage.py is located) **
 ```
 python manage.py runserver 
 ```
