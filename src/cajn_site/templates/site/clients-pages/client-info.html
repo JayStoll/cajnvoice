@@ -1,0 +1,12 @@
+{% extends 'site/base-with-nav.html' %}
+
+{% block title %}Client - {{client_info.client_f_name}}{%endblock%}
+
+{% block content %}
+    <h1>Getting information for: {{client_info.client_f_name}} {{client_info.client_l_name}}</h1>
+    <form action="/DeleteClient/{{client_info.id}}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete Client">
+    </form>
+    <h5>Vehicles:</h5>
+{%endblock%}

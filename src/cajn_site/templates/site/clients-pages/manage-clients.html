@@ -4,37 +4,11 @@
 
 {% block content %}
     <h1>Manage Clients</h1>
-    <h4>A list of all clients should show up here</h4>
+    
+    <h4>Names:</h4>
 
-    <!-- add a search bar once we get a bit of information added to the datatbase -->
-
-    <table>
-        <tr>
-            <th>Name:</th>
-            <th>Vehicles:</th>
-            <th>Details</th>
-        </tr>
-        <!-- name loop
-        <tr>
-            <td>John Doe</td> -> this needs to be clickable - update the page with the vehicle loop
-            -> Maybe a client page? - template page that will be updated based on client information passed into it
-        </tr>
-        endloop -->
-    </table>
-
-    <!-- 
-        ** Need to find out what needs to be programmed here and what needs to be done in the views.py **
-        for the data in the clients database
-            print out the name in a button 
-        
-        if a button is clicked
-            for the data in the given clients.vehicles database
-                print the vehicle names in a button
-
-        if a vehicle button is clicked
-            for the data in the given clients.vehicles.notes && (later date) clients.vehicles.invoices
-                print the data to the page
-                when an invoice is clicked open a preview in a new window 
-                when notes is clicked open the work_done notes  
-     -->
+    <!-- Generate a button instead of a list -> goes to new page passing the information in -->
+    {% for clients in all_clients %}
+        <li><a href="/client-info/{{clients.id}}">{{ clients.client_f_name }} {{clients.client_l_name}}</a></li>
+    {% endfor %}
 {% endblock %}

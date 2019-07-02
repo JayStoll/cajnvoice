@@ -1,0 +1,20 @@
+{% extends 'site/base-with-nav.html' %}
+
+{% block title %}Add Client{%endblock%}
+
+{% block content %}
+    <form method="POST" action="/AddNewClient/">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th><input type="text" name="f_name"/></th>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <th><input type="text" name="l_name"/></th>
+            </tr>
+        </table>
+        <input type="submit" value="Add Client">
+    </form>
+{%endblock%}
