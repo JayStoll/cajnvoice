@@ -4,9 +4,16 @@
 
 {% block content %}
     <h1>Getting information for: {{client_info.client_f_name}} {{client_info.client_l_name}}</h1>
+    <h3>Email: <a style="font-weight:normal;">{{client_info.client_email}}</a></h3>
+    <h3>Mailing Address:</h3>
+    <h3>
+        <a style="font-weight:normal;">
+            {{client_info.mailing_address}} <br/>
+            {{client_info.city}}, {{client_info.postal_code}}
+        </a>
+    </h3>
     <form action="/DeleteClient/{{client_info.id}}" method="post">
         {% csrf_token %}
         <input type="submit" value="Delete Client">
     </form>
-    <h5>Vehicles:</h5>
 {%endblock%}
