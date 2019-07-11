@@ -30,17 +30,19 @@
                 <th>City</th>
                 <th><input type="text" name="city"/></th>
             </tr>
-            <tr>
+            <!--<tr>
                 <th>Vehicle</th> 
                 <th>
                     <select name="vehicle">
+                        <option value="none">None</option>
                         {% for vehicles in vehicle_list %}
-                            <option value="{{vehicles.vehicle_brand}} {{vehicles.vehicle_type}}">{{vehicles.vehicle_brand}} {{vehicles.vehicle_type}}</option>
+                            <option value="{{vehicles.vehicle_brand}}{{vehicles.vehicle_type}}">{{vehicles.vehicle_brand}} {{vehicles.vehicle_type}}</option>
                         {% endfor %}
                     </select>
                 </th>
-            </tr>
+            </tr>-->
         </table>
+        <!-- May not do vehicle input here and maybe in the manage client for now -->>
         <input type="submit" value="Add Client">
     </form>
 {%endblock%}

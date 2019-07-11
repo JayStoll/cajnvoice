@@ -12,6 +12,12 @@
             {{client_info.city}}, {{client_info.postal_code}}
         </a>
     </h3>
+
+    <h1>Vehicles:</h1>
+    {% for v in client_info.vehicles.all %}
+        <p>test</p>
+    {% endfor %}
+
     <form action="/DeleteClient/{{client_info.id}}" method="post">
         {% csrf_token %}
         <input type="submit" value="Delete Client">

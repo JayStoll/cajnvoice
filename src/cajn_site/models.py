@@ -4,6 +4,9 @@ class Vehicle(models.Model):
     vehicle_brand = models.TextField()
     vehicle_type = models.TextField()
 
+    def print(self):
+        print(self.vehicle_brand, self.vehicle_type)
+
 class Vehicle_Work(models.Model):
     work_done = models.TextField(blank=True)
     vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
@@ -15,4 +18,4 @@ class Clients(models.Model):
     mailing_address = models.TextField(blank=False)
     postal_code = models.TextField(max_length=7, blank=False) # ADA DAD format required, 7 char max (includes space) 
     city = models.TextField(max_length=25, blank=False)
-    vehicle_id = models.ManyToManyField(Vehicle)
+    vehicles = models.ManyToManyField(Vehicle)
