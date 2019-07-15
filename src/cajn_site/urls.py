@@ -10,7 +10,6 @@ urlpatterns = [
     path('add-vehicle/', views.AddVehicleView, name='cajn-add-vehicle'),
 
     # add info to db routes
-    path('AddNewClient/', views.AddClient),
     path('DeleteClient/<int:id>', views.DeleteClient),
     path('AddNewVehicle/', views.AddVehicle),
 ]

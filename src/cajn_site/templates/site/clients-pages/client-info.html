@@ -6,16 +6,14 @@
     <h1>Getting information for: {{client_info.client_f_name}} {{client_info.client_l_name}}</h1>
     <h3>Email: <a style="font-weight:normal;">{{client_info.client_email}}</a></h3>
     <h3>Mailing Address:</h3>
-    <h3>
-        <a style="font-weight:normal;">
-            {{client_info.mailing_address}} <br/>
-            {{client_info.city}}, {{client_info.postal_code}}
-        </a>
-    </h3>
+    <a style="font-weight:normal;">
+        {{client_info.mailing_address}} <br/>
+        {{client_info.city}}, {{client_info.postal_code}}
+    </a>
 
     <h1>Vehicles:</h1>
     {% for v in client_info.vehicles.all %}
-        <p>test</p>
+        {{ v.vehicle_brand }}
     {% endfor %}
 
     <form action="/DeleteClient/{{client_info.id}}" method="post">

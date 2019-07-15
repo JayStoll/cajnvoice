@@ -3,46 +3,28 @@
 {% block title %}Add Client{%endblock%}
 
 {% block content %}
-    <form method="POST" action="/AddNewClient/">
+    <form method="POST">
         {% csrf_token %}
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th><input type="text" name="f_name"/></th>
-            </tr>
-            <tr>
-                <th>Last Name</th>
-                <th><input type="text" name="l_name"/></th>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <th><input type="email" name="email"></th>
-            </tr>
-            <tr>
-                <th>Mailing Address</th>
-                <th><input type="text" name="add"/></th>
-            </tr>
-            <tr>
-                <th>Postal Code</th>
-                <th><input type="text" name="post_code"/></th>
-            </tr>
-            <tr>
-                <th>City</th>
-                <th><input type="text" name="city"/></th>
-            </tr>
-            <!--<tr>
-                <th>Vehicle</th> 
-                <th>
-                    <select name="vehicle">
-                        <option value="none">None</option>
-                        {% for vehicles in vehicle_list %}
-                            <option value="{{vehicles.vehicle_brand}}{{vehicles.vehicle_type}}">{{vehicles.vehicle_brand}} {{vehicles.vehicle_type}}</option>
-                        {% endfor %}
-                    </select>
-                </th>
-            </tr>-->
-        </table>
-        <!-- May not do vehicle input here and maybe in the manage client for now -->>
+        <fieldset>
+            <legend>Add Client</legend>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div>
+                    {{ field.errors }}
+                    {{field.label_tag}} {{ field }}
+                </div>
+                {% endfor %}
+        
+            {% if vehicle_list.count != 0 %}
+                <label for="id_vehicles">Add Vehicle</label>
+                <select name="vehicles">
+                    <option value="">-------</option>
+                    {% for v in vehicle_list %}
+                    <option value="{{v.vehicle_brand.strip}}_{{v.vehicle_type.split}}">{{v.vehicle_brand}} {{v.vehicle_type}}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </fieldset>
         <input type="submit" value="Add Client">
     </form>
 {%endblock%}
