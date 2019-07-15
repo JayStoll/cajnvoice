@@ -1,0 +1,30 @@
+{% extends 'site/base-with-nav.html' %}
+
+{% block title %}Add Client{%endblock%}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Add Client</legend>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div>
+                    {{ field.errors }}
+                    {{field.label_tag}} {{ field }}
+                </div>
+                {% endfor %}
+        
+            {% if vehicle_list.count != 0 %}
+                <label for="id_vehicles">Add Vehicle</label>
+                <select name="vehicles">
+                    <option value="">-------</option>
+                    {% for v in vehicle_list %}
+                    <option value="{{v.vehicle_brand.strip}}_{{v.vehicle_type.split}}">{{v.vehicle_brand}} {{v.vehicle_type}}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </fieldset>
+        <input type="submit" value="Add Client">
+    </form>
+{%endblock%}

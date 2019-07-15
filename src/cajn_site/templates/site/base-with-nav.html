@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8"/>
 
-        <title>{% block title %} CAJNvoice {% endblock %}</title>
+        <title>{% block title %}CAJNvoice{% endblock %}</title>
     </head>
     <body>
         <nav>
             <ul>
-                <li>Manage Clients</li>
-                <li>Add Client</li>
-                <li>Add Vehicle</li>
+                <li><a href="{% url 'cajn-manage-clients' %}">Manage Clients</a></li>
+                <li><a href="{% url 'cajn-add-client' %}">Add Client</a></li>
+                <li><a href="{% url 'cajn-add-vehicle' %}">Add Vehicle</a></li>
                 <li>Add Part</li>
                 <li>Create Invoice</li>
             </ul>
