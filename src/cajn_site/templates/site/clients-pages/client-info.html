@@ -13,7 +13,7 @@
 
     <h1>Vehicles:</h1>
     {% for v in client_info.vehicles.all %}
-        {{ v.vehicle_brand }}
+        <a href="#">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
     {% endfor %}
 
     <form action="/DeleteClient/{{client_info.id}}" method="post">
