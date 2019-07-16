@@ -26,21 +26,27 @@ def AddClientView(request):
     page = render(request, 'site/add-info-pages/add-client.html', {'vehicle_list': vehicles, 'form': form})
 
     if form.is_valid():
-        add_vehicle = "null"#= request.POST["vehicles"]
-        AddClient(form, add_vehicle)
+        add_vehicle = request.POST["vehicles"]
+        if Vehicle.objects.count() > 0 and add_vehicle != "null":
+            AddClient_vehicle(form, add_vehicle)
+        else:
+            AddClient(form)
         # return back to the main home page
         return redirect('cajn-manage-clients')
 
     # default return
     return page
 
-def AddClient(form, add_vehicle):
+def AddClient_vehicle(form, add_vehicle):
+    new_client = AddClient(form)
+    new_client.vehicles.add(add_vehicle)
+
+def AddClient(form):
     # get the cleaned data from the form and create a new object using said data
     new_client = Clients.objects.create(client_f_name = form.cleaned_data["first_name"], client_l_name = form.cleaned_data["last_name"], 
                                         client_email = form.cleaned_data["email"], mailing_address = form.cleaned_data["address"], 
                                         postal_code = form.cleaned_data["postal_code"], city = form.cleaned_data["city"])
-
-    #new_client.vehicles.add(add_vehicle)
+    return new_client
 
 def ClientManagePage(request, client_id):
     client_info = Clients.objects.get(pk = client_id)
