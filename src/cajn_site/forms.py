@@ -1,5 +1,9 @@
 from django import forms
 
+class AddVehicleForm(forms.Form):
+    vehicle_brand = forms.CharField(label='Vehicle Brand', max_length=25)
+    vehicle_type = forms.CharField(label='Vehicle Type', max_length=25)
+
 class AddClientForm(forms.Form):
     first_name = forms.CharField(label='First Name', max_length=20)
     last_name = forms.CharField(label='Last Name', max_length=20)

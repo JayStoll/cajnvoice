@@ -2,21 +2,19 @@
 
 {% block title %}Add Vehicle{% endblock %}
 
-{% block content %}
-    <h1>Add Vehicle</h1>
-    
-    <form action="/AddNewVehicle/" method="post">
+{% block content %}    
+    <form method="post">
         {% csrf_token %}
-        <table>
-            <tr>
-                <th>Brand</th>
-                <th><input type="text" name="brand"/></th>
-            </tr>
-            <tr>
-                <th>Model</th>
-                <th><input type="text" name="model"/></th>
-            </tr>
-        </table>
+        <fieldset>
+            <legend>Add Vehicle</legend>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+            <div>
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+            {% endfor %}
+        </fieldset>
         <input type="submit" value="Add Vehicle">
     </form>
 {% endblock %}
