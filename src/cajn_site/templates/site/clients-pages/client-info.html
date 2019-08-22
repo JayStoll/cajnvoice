@@ -15,7 +15,7 @@
         {{client_info.city}}, {{client_info.postal_code}}
     </a>
 
-    <h1>Vehicles:</h1>
+    <h1>Vehicles:  <button href="/AddVehicleClient/{{client_info.id}}">Add new vehicle</button></h1>
     {% for v in client_info.vehicles.all %}
         <a href="#">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
     {% endfor %}
