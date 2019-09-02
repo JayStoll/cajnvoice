@@ -4,6 +4,10 @@
 
 {% block content %}
     <h1>Getting information for: {{client_info.client_f_name}} {{client_info.client_l_name}}</h1>
+    <form action="/EditClient/{{client_info.id}}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Edit">
+    </form>
     <h3>Email: <a style="font-weight:normal;">{{client_info.client_email}}</a></h3>
     <h3>Mailing Address:</h3>
     <a style="font-weight:normal;">
@@ -11,10 +15,12 @@
         {{client_info.city}}, {{client_info.postal_code}}
     </a>
 
-    <h1>Vehicles:</h1>
+    <h1>Vehicles:  <button href="/AddVehicleClient/{{client_info.id}}">Add new vehicle</button></h1>
     {% for v in client_info.vehicles.all %}
         <a href="#">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
     {% endfor %}
+
+    <br><br>
 
     <form action="/DeleteClient/{{client_info.id}}" method="post">
         {% csrf_token %}

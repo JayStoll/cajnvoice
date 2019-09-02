@@ -1,0 +1,22 @@
+{% extends 'site/base-with-nav.html' %}
+
+{% block title %}Edit Client{% endblock %}
+
+{% block content %}
+<h1>*** This is work in progress and currently does nothing! ***</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Edit Client</legend>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        <div>
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+        </div>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Update">
+</form>
+{% endblock %}
