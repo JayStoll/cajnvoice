@@ -8,6 +8,7 @@ urlpatterns = [
     path('add-client/', client.AddClientView, name='cajn-add-client'),
     path('client-info/<int:client_id>', client.ClientManagePage, name='cajn-client'),
     path('add-vehicle/', vehicle.AddVehicleView, name='cajn-add-vehicle'),
+    path('client-vehicle/<int:id>', client.AddVehicleClient_FormRequest),
 
     # add info to db routes
     path('DeleteClient/<int:id>', client.DeleteClient),

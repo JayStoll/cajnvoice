@@ -7,7 +7,6 @@
     
     <h4>Names:</h4>
 
-    <!-- Generate a button instead of a list -> goes to new page passing the information in -->
     {% for clients in all_clients %}
         <li><a href="/client-info/{{clients.id}}">{{ clients.client_f_name }} {{clients.client_l_name}}</a></li>
     {% endfor %}

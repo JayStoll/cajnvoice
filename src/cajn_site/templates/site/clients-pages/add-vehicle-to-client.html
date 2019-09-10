@@ -3,10 +3,10 @@
 {% block title %}Add Vehicle to {{client_info.client_f_name}}{%endblock%}
 
 {% block content %}
-<form method="POST">
+<form method="POST" action="/client-vehicle/{{client_info.id}}">
     {% csrf_token %}
     <fieldset>
-        <legend>Add Vehicle To Client</legend>
+        <legend>Add Vehicle To {{client_info.client_f_name}} {{client_info.client_l_name}}</legend>
         {% if vehicle_list.count != 0 %}
             <label for="id_vehicles">Add Vehicle</label>
             <select name="vehicles">

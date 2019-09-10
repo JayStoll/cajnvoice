@@ -14,15 +14,14 @@ def AddClientView(request):
 
     # render the page to the browser passing in vehcile information and the form needed
     page = render(request, 'site/add-info-pages/add-client.html', {'vehicle_list': Vehicle.objects.all(), 'form': form})
-    print("page render ############")
     if form.is_valid():
-        print("############# From Valid #############")
-        add_vehicle = request.POST["vehicles"]
-        print(add_vehicle)
-        if Vehicle.objects.count() > 0 and add_vehicle != "null":
-            AddClient_vehicle(form, add_vehicle)
-        else:
-            test = AddClient(form)
+        if Vehicle.objects.count() > 0:
+            add_vehicle = request.POST["vehicles"]
+            if add_vehicle != "null":
+                AddClient_vehicle(form, add_vehicle)
+                return redirect('cajn-manage-clients')
+
+        test = AddClient(form)
         # return back to the main home page
         return redirect('cajn-manage-clients')
 
@@ -53,5 +52,15 @@ def DeleteClient(request, id):
 
 
 @login_required
-def AddVehicleToClient(request):
-    return render(request, 'site/clients-pages/add-vehicle-to-client.html', {'vehicle_list': Vehicle.objects.all()})
+def AddVehicleToClient(request, id):
+    return render(request, 'site/clients-pages/add-vehicle-to-client.html', {'vehicle_list': Vehicle.objects.all(), 'client_info': Clients.objects.get(pk = id)})
+
+def AddVehicleClient_FormRequest(request, id):
+    vehicle_id = request.POST['vehicles']
+
+    UpdateClientById(id, vehicle_id)
+
+    return redirect('cajn-manage-clients')
+
+def UpdateClientById(id, vehicle_id):
+    Clients.objects.get(pk = id).vehicles.add(vehicle_id)

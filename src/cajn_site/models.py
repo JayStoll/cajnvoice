@@ -15,4 +15,4 @@ class Clients(models.Model):
     mailing_address = models.TextField(blank=False)
     postal_code = models.TextField(max_length=7, blank=False) # ADA DAD format required, 7 char max (includes space) 
     city = models.TextField(max_length=25, blank=False)
-    vehicles = models.ManyToManyField(Vehicle, blank=True)
+    vehicles = models.ManyToManyField(Vehicle, blank=True, unique=False)
