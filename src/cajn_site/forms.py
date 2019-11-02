@@ -1,5 +1,9 @@
 from django import forms
 
+class AddPartForm(forms.Form):
+    part_name = forms.CharField(label="Part Name")
+    part_serial_num = forms.CharField(label="Serial Number")
+
 class AddVehicleForm(forms.Form):
     vehicle_brand = forms.CharField(label='Vehicle Brand', max_length=25)
     vehicle_type = forms.CharField(label='Vehicle Type', max_length=25)

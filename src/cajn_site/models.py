@@ -1,11 +1,18 @@
 from django.db import models
 
+class Parts(models.Model):
+    part_name = models.TextField(blank=False)
+    part_serial = models.TextField(blank=False)
+
+
 class Vehicle(models.Model):
-    vehicle_brand = models.TextField()
-    vehicle_type = models.TextField()
+    vehicle_brand = models.TextField(blank=False)
+    vehicle_type = models.TextField(blank=False)
 
 class Vehicle_Work(models.Model):
     work_done = models.TextField(blank=True)
+    last_service_hours = models.PositiveIntegerField(blank=False)
+    parts_id = models.ManyToManyField(Parts, blank=True, unique=False) # allow a list of parts to be added
     vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 
 class Clients(models.Model):

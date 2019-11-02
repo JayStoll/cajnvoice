@@ -6,7 +6,7 @@
     <form method="post">
         {% csrf_token %}
         <fieldset>
-            <legend>Add Vehicle</legend>
+            <legend>Add {{ type }}</legend>
             {{ form.non_field_errors }}
             {% for field in form %}
             <div>
@@ -15,6 +15,6 @@
             </div>
             {% endfor %}
         </fieldset>
-        <input type="submit" value="Add Vehicle">
+        <input type="submit" value="Add {{ type }}">
     </form>
 {% endblock %}

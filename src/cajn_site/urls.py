@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import base_views as base, client_views as client, vehicle_views as vehicle
+from .views import base_views as base, client_views as client, vehicle_views as vehicle, part_views as part
 
 urlpatterns = [
     # visible page routes
@@ -8,6 +8,7 @@ urlpatterns = [
     path('add-client/', client.AddClientView, name='cajn-add-client'),
     path('client-info/<int:client_id>', client.ClientManagePage, name='cajn-client'),
     path('add-vehicle/', vehicle.AddVehicleView, name='cajn-add-vehicle'),
+    path('add-part/', part.AddPartView, name='cajn-add-part'),
     path('client-vehicle/<int:id>', client.AddVehicleClient_FormRequest),
 
     # add info to db routes
