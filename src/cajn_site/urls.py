@@ -10,6 +10,10 @@ urlpatterns = [
     path('add-vehicle/', vehicle.AddVehicleView, name='cajn-add-vehicle'),
     path('add-part/', part.AddPartView, name='cajn-add-part'),
     path('client-vehicle/<int:id>', client.AddVehicleClient_FormRequest),
+    path('work-done/<int:client_id>/<int:vehicle_id>', client.CreateWorkDoneForm),
+    
+    # This one will need to be updated when invoice generation is under development
+    path('create-invoice/', base.CreateInvoice, name="cajn-site-create-invoice"),
 
     # add info to db routes
     path('DeleteClient/<int:id>', client.DeleteClient),

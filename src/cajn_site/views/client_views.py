@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from ..models import Clients, Vehicle
-from ..forms import AddClientForm
+from ..models import Clients, Vehicle, Parts, Vehicle_Work
+from ..forms import AddClientForm, AddWorkDoneForm
 
 @login_required
 def AddClientView(request):
@@ -21,7 +21,7 @@ def AddClientView(request):
                 AddClient_vehicle(form, add_vehicle)
                 return redirect('cajn-manage-clients')
 
-        test = AddClient(form)
+        AddClient(form)
         # return back to the main home page
         return redirect('cajn-manage-clients')
 
@@ -58,9 +58,26 @@ def AddVehicleToClient(request, id):
 def AddVehicleClient_FormRequest(request, id):
     vehicle_id = request.POST['vehicles']
 
-    UpdateClientById(id, vehicle_id)
+    if vehicle_id != "null":
+        UpdateClientById(id, vehicle_id)
 
     return redirect('cajn-manage-clients')
 
 def UpdateClientById(id, vehicle_id):
     Clients.objects.get(pk = id).vehicles.add(vehicle_id)
+
+@login_required
+def CreateWorkDoneForm(request, client_id, vehicle_id):
+    client = Clients.objects.get(pk = client_id)
+    vehicle = Vehicle.objects.get(pk = vehicle_id)
+    work_done = get_object_or_404(Vehicle_Work, client_id = client_id, vehicle_id = vehicle_id)
+
+    if request.method == 'POST':
+        form = AddWorkDoneForm(request.POST)
+    else:
+        form = AddWorkDoneForm()
+
+    page = render(request, 'site/clients-pages/add-work-done.html', {'client_info': client, "vehicle_info": vehicle})
+
+    return page
+

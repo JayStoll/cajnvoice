@@ -17,7 +17,7 @@
 
     <h1>Vehicles:  <form method="POST" action="/AddVehicleClient/{{client_info.id}}">{% csrf_token %} <input type="submit" value="Add New Vehicle"></form></h1>
     {% for v in client_info.vehicles.all %}
-        <a href="#">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
+        <a href="/work-done/{{client_info.id}}/{{v.id}}">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
         <br/>
     {% endfor %}
 

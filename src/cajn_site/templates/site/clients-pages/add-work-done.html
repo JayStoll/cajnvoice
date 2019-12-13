@@ -1,0 +1,9 @@
+{% extends 'site/base-with-nav.html' %}
+
+{% block title %}Client - {{client_info.client_f_name}}{%endblock%}
+
+{% block content %}
+    <h1>Showing work done to vehicle {{vehicle_info.vehicle_brand}} {{vehicle_info.vehicle_type}}</h1>
+    <h3><a href='#'>Add new work</a></h3>
+    
+{%endblock%}

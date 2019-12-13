@@ -9,3 +9,10 @@ def home(request):
 @login_required
 def ManageClients(request):
     return render(request, 'site/clients-pages/manage-clients.html', {'all_clients': Clients.objects.all()})
+
+##############################
+#   This is will be moved to an invoice view .py file later!
+##############################
+@login_required
+def CreateInvoice(request):
+    return render(request, 'site/invoice_generation_pages/invoice.html')

@@ -1,5 +1,10 @@
 from django import forms
 
+class AddWorkDoneForm(forms.Form):
+    last_service_date = forms.TimeField(label="Date of last service")
+    last_service_hours = forms.IntegerField(label="Hours/KM since last service")
+    work_done = forms.TextInput()
+
 class AddPartForm(forms.Form):
     part_name = forms.CharField(label="Part Name")
     part_serial_num = forms.CharField(label="Serial Number")
