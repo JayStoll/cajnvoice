@@ -3,16 +3,15 @@
 {% block title %}Edit Client{% endblock %}
 
 {% block content %}
-<h1>*** This is work in progress and currently does nothing! ***</h1>
+<h1>*** This is work in progress! ***</h1>
 
-<form method="POST">
+<form method="GET">
     {% csrf_token %}
     <fieldset>
         <legend>Edit Client</legend>
         {{ form.non_field_errors }}
         {% for field in form %}
         <div>
-            {{ field.errors }}
             {{ field.label_tag }} {{ field }}
         </div>
         {% endfor %}

@@ -77,7 +77,35 @@ def CreateWorkDoneForm(request, client_id, vehicle_id):
     else:
         form = AddWorkDoneForm()
 
-    page = render(request, 'site/clients-pages/add-work-done.html', {'client_info': client, "vehicle_info": vehicle})
+    return render(request, 'site/clients-pages/add-work-done.html', {'client_info': client, "vehicle_info": vehicle})
+
+# find a way to clean this code up
+def ReturnClientInfoList():
+    info = [Clients._meta.get_field('client_f_name'), Clients._meta.get_field('client_l_name'), Clients._meta.get_field('client_email'),
+            Clients._meta.get_field('mailing_address'), Clients._meta.get_field('postal_code'), Clients._meta.get_field('city')]
+    return info
+
+@login_required
+def EditClient(request, id):
+    client = Clients.objects.get(pk = id)
+    field_objects = ReturnClientInfoList()
+
+    if request.method == 'POST':
+        form = AddClientForm(request.POST)
+    else: 
+        # currently doesn't work, might have to hard code in html tags
+        form = AddClientForm(initial={'first_name': getattr(client, field_objects[0].attname), 'last_name': getattr(client, field_objects[1].attname),
+                                    'email': getattr(client, field_objects[2].attname), 'address': getattr(client, field_objects[3].attname),
+                                    'postal_code': getattr(client, field_objects[4].attname), 'city': getattr(client, field_objects[5].attname)})
+
+    page = render(request, 'site/clients-pages/edit-client-info.html', {'form': form})
+
+    if form.is_valid():
+        print("Valid")
+        Clients.objects.filter(pk = id).update(client_f_name = form.cleaned_data["first_name"], client_l_name = form.cleaned_data["last_name"], 
+                        client_email = form.cleaned_data["email"], mailing_address = form.cleaned_data["address"], 
+                        postal_code = form.cleaned_data["postal_code"], city = form.cleaned_data["city"])
+
+        return redirect('cajn-client', id)
 
     return page
-

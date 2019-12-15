@@ -17,6 +17,6 @@ urlpatterns = [
 
     # add info to db routes
     path('DeleteClient/<int:id>', client.DeleteClient),
-    #path('EditClient/<int:id>', views.EditClient),
+    path('EditClient/<int:id>', client.EditClient),
     path('AddVehicleClient/<int:id>', client.AddVehicleToClient),
 ]
