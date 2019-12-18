@@ -61,23 +61,10 @@ def AddVehicleClient_FormRequest(request, id):
     if vehicle_id != "null":
         UpdateClientById(id, vehicle_id)
 
-    return redirect('cajn-manage-clients')
+    return redirect('cajn-client', id)
 
 def UpdateClientById(id, vehicle_id):
     Clients.objects.get(pk = id).vehicles.add(vehicle_id)
-
-@login_required
-def CreateWorkDoneForm(request, client_id, vehicle_id):
-    client = Clients.objects.get(pk = client_id)
-    vehicle = Vehicle.objects.get(pk = vehicle_id)
-    work_done = get_object_or_404(Vehicle_Work, client_id = client_id, vehicle_id = vehicle_id)
-
-    if request.method == 'POST':
-        form = AddWorkDoneForm(request.POST)
-    else:
-        form = AddWorkDoneForm()
-
-    return render(request, 'site/clients-pages/add-work-done.html', {'client_info': client, "vehicle_info": vehicle})
 
 # find a way to clean this code up
 def ReturnClientInfoList():

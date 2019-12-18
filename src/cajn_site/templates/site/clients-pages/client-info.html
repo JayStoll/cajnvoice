@@ -1,6 +1,6 @@
 {% extends 'site/base-with-nav.html' %}
 
-{% block title %}Client - {{client_info.client_f_name}}{%endblock%}
+{% block title %}Client - {{client_info.client_f_name}}{% endblock %}
 
 {% block content %}
     <h1>Getting information for: {{client_info.client_f_name}} {{client_info.client_l_name}}</h1>
@@ -17,7 +17,7 @@
 
     <h1>Vehicles:  <form method="POST" action="/AddVehicleClient/{{client_info.id}}">{% csrf_token %} <input type="submit" value="Add New Vehicle"></form></h1>
     {% for v in client_info.vehicles.all %}
-        <a href="/work-done/{{client_info.id}}/{{v.id}}">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
+        <a href="/vehicle-info/{{client_info.id}}/{{v.id}}">{{ v.vehicle_brand }} {{ v.vehicle_type }}</a>
         <br/>
     {% endfor %}
 
@@ -27,4 +27,4 @@
         {% csrf_token %}
         <input type="submit" value="Delete Client">
     </form>
-{%endblock%}
+{% endblock %}

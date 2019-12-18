@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from ..models import Vehicle
-from ..forms import AddVehicleForm
+from ..models import Vehicle, Clients, Vehicle_Work
+from ..forms import AddVehicleForm, AddWorkDoneForm
 
 @login_required
 def AddVehicleView(request):
@@ -19,3 +19,25 @@ def AddVehicleView(request):
         return redirect('cajn-manage-clients')
 
     return page
+
+@login_required
+def VehicleInfoPage(request, client_id, vehicle_id):
+    client = Clients.objects.get(pk = client_id)
+    vehicle = Vehicle.objects.get(pk = vehicle_id)
+
+    try:
+        # get the work that has been done on the vehicle owned by the client
+        work_done = Vehicle_Work.objects.get(client_id = client_id, vehicle_id=vehicle_id)
+    except Vehicle_Work.DoesNotExist:
+        work_done = "null"
+
+    if request.method == 'POST':
+        form = AddWorkDoneForm(request.POST)
+    else:
+        form = AddWorkDoneForm()
+
+    return render(request, 'site/clients-pages/vehicle-info-page.html', {'client_info': client, "vehicle_info": vehicle, 'work':work_done})
+
+@login_required
+def AddWorkDone(request, client_id, vehicle_id):
+    return redirect('cajn-manage-clients')
