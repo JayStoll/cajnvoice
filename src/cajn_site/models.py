@@ -19,10 +19,14 @@ class Clients(models.Model):
     city = models.TextField(max_length=25, blank=False)
     vehicles = models.ManyToManyField(Vehicle, blank=True, unique=False)
 
+    def First_Name(self):
+        return self.client_f_name
+
 
 class Vehicle_Work(models.Model):
+    title = models.TextField()
     work_done = models.TextField(blank=True)
-    last_service_date = models.TimeField(blank=True)
+    last_service_date = models.DateField(blank=True)
     last_service_hours = models.PositiveIntegerField(blank=False)
     parts_id = models.ManyToManyField(Parts, blank=True, unique=False) # allow a list of parts to be added
     vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)

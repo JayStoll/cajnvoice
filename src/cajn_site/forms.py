@@ -1,9 +1,9 @@
 from django import forms
 
 class AddWorkDoneForm(forms.Form):
-    last_service_date = forms.TimeField(label="Date of last service")
+    last_service_date = forms.DateField(label="Date of last service (MM/DD/YYYY)") # see about changing the order of this
     last_service_hours = forms.IntegerField(label="Hours/KM since last service")
-    work_done = forms.TextInput()
+    work_done = forms.CharField(widget=forms.Textarea)
 
 class AddPartForm(forms.Form):
     part_name = forms.CharField(label="Part Name")

@@ -7,18 +7,16 @@
     {% csrf_token %}
     <fieldset>
         <legend>Add Vehicle To {{client_info.client_f_name}} {{client_info.client_l_name}}</legend>
-        {% if vehicle_list.count != 0 %}
             <label for="id_vehicles">Add Vehicle</label>
             <select name="vehicles">
                 <option value="null">-------</option>
-                {% for v in vehicle_list %}
-                <option value="{{v.id}}">{{v.vehicle_brand}} {{v.vehicle_type}}</option>
-                {% endfor %}
+                {% if vehicle_list.count != 0 %}
+                    {% for v in vehicle_list %}
+                        <option value="{{v.id}}">{{v.vehicle_brand}} {{v.vehicle_type}}</option>
+                    {% endfor %}
+                {% endif %}
             </select>
-        {% else %}
-            <h1>No Vehicles in the database!</h1>
-        {% endif %}
     </fieldset>
-    <input type="submit" value="Add Client">
+    <input type="submit" value="Add to Client">
 </form>
 {% endblock %}

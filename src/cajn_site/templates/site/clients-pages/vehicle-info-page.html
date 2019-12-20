@@ -7,7 +7,11 @@
     <h3><a href="{% url 'cajn-work-done' client_info.id vehicle_info.id %}">Add new work</a></h3>
     <!-- loop through the list of work done to the vehicle stored in the database -->
     {% if work != "null" %}
-        <h1>Got some work in the database!</h1>
+        <h1>Work we found for {{client_info.client_f_name}} {{client_info.client_l_name}} for 
+        vehicle '{{vehicle_info.vehicle_brand}} {{vehicle_info.vehicle_type}}'!</h1>
+        {% for w in work %}
+            <h4><a href="#">Date - {{w.title}}</a></h4>
+        {% endfor %}
     {% else %}
         <h1>No work to display</h1>    
     {% endif %}

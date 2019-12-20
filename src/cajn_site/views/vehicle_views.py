@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime
+
 from ..models import Vehicle, Clients, Vehicle_Work
 from ..forms import AddVehicleForm, AddWorkDoneForm
 
@@ -27,7 +29,7 @@ def VehicleInfoPage(request, client_id, vehicle_id):
 
     try:
         # get the work that has been done on the vehicle owned by the client
-        work_done = Vehicle_Work.objects.get(client_id = client_id, vehicle_id=vehicle_id)
+        work_done = Vehicle_Work.objects.filter(client_id = client_id, vehicle_id=vehicle_id)
     except Vehicle_Work.DoesNotExist:
         work_done = "null"
 
@@ -40,4 +42,19 @@ def VehicleInfoPage(request, client_id, vehicle_id):
 
 @login_required
 def AddWorkDone(request, client_id, vehicle_id):
-    return redirect('cajn-manage-clients')
+    vehcile = Vehicle.objects.get(pk = vehicle_id)
+    client = Clients.objects.get(pk = client_id)
+
+    if request.method == 'POST':
+        form = AddWorkDoneForm(request.POST)
+    else:
+        form = AddWorkDoneForm()
+
+    data_type = "Work"
+    page = render(request, 'site/add-info-pages/add-info-by-type.html', {'form': form, 'type':data_type})
+
+    if form.is_valid():
+        Vehicle_Work.objects.create(title = datetime.today, vehicle_id = vehcile, client_id = client, last_service_date = form.cleaned_data['last_service_date'], last_service_hours = form.cleaned_data['last_service_hours'], work_done = form.cleaned_data['work_done'])
+        return redirect('cajn-manage-clients')
+
+    return page

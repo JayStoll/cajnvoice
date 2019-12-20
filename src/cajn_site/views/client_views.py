@@ -88,7 +88,6 @@ def EditClient(request, id):
     page = render(request, 'site/clients-pages/edit-client-info.html', {'form': form})
 
     if form.is_valid():
-        print("Valid")
         Clients.objects.filter(pk = id).update(client_f_name = form.cleaned_data["first_name"], client_l_name = form.cleaned_data["last_name"], 
                         client_email = form.cleaned_data["email"], mailing_address = form.cleaned_data["address"], 
                         postal_code = form.cleaned_data["postal_code"], city = form.cleaned_data["city"])
